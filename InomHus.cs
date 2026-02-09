@@ -8,5 +8,11 @@ namespace Weather
 {
     internal class InomHus
     {
+        public static void Show()
+        {
+            Console.Clear();
+            Console.WriteLine("Inom hus");
+            Console.WriteLine("---------------------");
+        }
     }
 }
