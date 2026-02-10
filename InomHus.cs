@@ -25,6 +25,7 @@ namespace Weather
             switch (char.ToLower(key.KeyChar))
             {
                 case '1': Linq.MedelTempPerDag("tempdata5-med fel.txt", "Inne"); break;
+                case '2': Linq.VarmasteDag("tempdata5-med fel.txt", "Inne"); break;
 
             }
         }

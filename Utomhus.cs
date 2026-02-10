@@ -17,7 +17,7 @@ namespace Weather
 
             Console.ForegroundColor= ConsoleColor.Green;
             Console.WriteLine("1. Medeltemperatur och luftfuktighet per dag");
-            Console.WriteLine("2. Varmast till kallaste dagen enligt medeltemperatur per dag");
+            Console.WriteLine("2. Varmast till kallaste dagen");
             Console.ResetColor();
 
             var key = Console.ReadKey();
@@ -25,6 +25,7 @@ namespace Weather
             switch (char.ToLower(key.KeyChar))
             {
                 case '1': Linq.MedelTempPerDag("tempdata5-med fel.txt", "Ute"); break;
+                case '2': Linq.VarmasteDag("tempdata5-med fel.txt", "Ute"); break;
 
             }
         }
