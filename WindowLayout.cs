@@ -11,13 +11,23 @@ namespace Weather
     {
         public static void Title()
         {
-
-
             Console.OutputEncoding = Encoding.UTF8;
             Console.InputEncoding = Encoding.UTF8;
-            List<string> title = new List<string> { "0. Läsa hela filen", "1. Utomhus", "2. Inomhus" };
+            List<string> title = new List<string> {"0. Läsa hela filen", "1. Utomhus", "2. Inomhus"};
             var windowTitle = new Window("Välj ett alternativ", 0, 0, title);
             windowTitle.Draw();
+        }
+        public static void Inomhus()
+        {
+            List<string> inomhus = new List<string> {"1. Medeltemperatur och luftfuktighet per dag", "2. Varmast till kallaste dagen"};
+            var windowInomhus = new Window("Inomhus",0,0, inomhus);
+            windowInomhus.Draw();
+        }
+        public static void Uomhus()
+        {
+            List<string> utomhus = new List<string> { "1. Medeltemperatur och luftfuktighet per dag", "2. Varmast till kallaste dagen" };
+            var windowUomhus = new Window("Utomhus", 0, 0, utomhus);
+            windowUomhus.Draw();
         }
     }
 }

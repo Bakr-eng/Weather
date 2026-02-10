@@ -11,15 +11,7 @@ namespace Weather
         public static void Show()
         {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("Inomhus");
-            Console.WriteLine("----------------------");
-
-            Console.ForegroundColor= ConsoleColor.Green;
-            Console.WriteLine("1. Medeltemperatur och luftfuktighet per dag");
-            Console.WriteLine("2. Varmast till kallaste dagen");
-            Console.ResetColor();
-
+            WindowLayout.Inomhus();
             var key = Console.ReadKey();
 
             switch (char.ToLower(key.KeyChar))
