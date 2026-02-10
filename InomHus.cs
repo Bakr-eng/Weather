@@ -17,7 +17,7 @@ namespace Weather
 
             Console.ForegroundColor= ConsoleColor.Green;
             Console.WriteLine("1. Medeltemperatur och luftfuktighet per dag");
-            Console.WriteLine("2. Varmast till kallaste dagen enligt medeltemperatur per dag");
+            Console.WriteLine("2. Varmast till kallaste dagen");
             Console.ResetColor();
 
             var key = Console.ReadKey();

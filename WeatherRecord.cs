@@ -12,5 +12,31 @@ namespace Weather
         public string Place { get; set; }
         public double temp { get; set; }
         public int Humidity { get; set; }
+
+
+
+        public static List<WeatherRecord> Load(string filePath)
+        {
+            var List = new List<WeatherRecord>();
+
+            foreach (var line in File.ReadAllLines(filePath))
+            {
+                var p = line.Split(',');  // Dela upp texten vid varje komma
+
+                if (!DateTime.TryParse(p[0], out DateTime time)) continue;// Hämtar inte felaktiga rader!!
+             
+                
+               
+
+                List.Add(new WeatherRecord
+                {
+                    Time = time,
+                    Place = p[1],
+                    temp = double.Parse(p[2]),
+                    Humidity = int.Parse(p[3])
+                });
+            }
+            return List;
+        }
     }
 }

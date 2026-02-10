@@ -11,7 +11,7 @@ namespace Weather
     {
         public static void MedelTempPerDag(string fileName, string place)
         {
-            var data = Load(Program.Path + fileName)
+            var data = WeatherRecord.Load(Program.Path + fileName)
                 .Where(x => x.Place == place);
 
             var result = data
@@ -22,7 +22,8 @@ namespace Weather
                     Temp = g.Average(x => x.temp),
                     Fukt = g.Average(x => x.Humidity)
                 })
-                .OrderBy(x => x.Datum);
+                .OrderBy(x => x.Datum)
+                .ToList();
 
 
 
@@ -42,7 +43,7 @@ namespace Weather
         public static void VarmasteDag(string fileName, string place)
         {
             Console.Clear();
-            var data = Load(Program.Path + fileName)
+            var data = WeatherRecord.Load(Program.Path + fileName)
                 .Where(x => x.Place == place);
 
             var result = data
@@ -53,7 +54,8 @@ namespace Weather
                     Temp = g.Average(x => x.temp),
                     Fukt = g.Average(x => x.Humidity)
                 })
-                .OrderByDescending(x => x.Temp);
+                .OrderByDescending(x => x.Temp)
+                .ToList();
 
 
 
@@ -61,6 +63,7 @@ namespace Weather
             Console.WriteLine("Varmaste till kalast dag (UTE)");
             Console.WriteLine("------------------------------------------------------");
             Console.ResetColor();
+
             foreach (var r in result)
             {
                 Console.WriteLine($"{r.Datum:yyyy-MM-dd} Temp: {r.Temp:F01}°C"); // F = floating point (decimal)
@@ -68,29 +71,6 @@ namespace Weather
             Console.ReadKey();
 
         }
-        public static List<WeatherRecord> Load(string filePath)
-        {
-            var List = new List<WeatherRecord>();
-
-            foreach (var line in File.ReadAllLines(filePath))
-            {
-                var p = line.Split(',');  // Dela upp texten vid varje komma
-
-                if (!DateTime.TryParse(p[0], out DateTime time)) // Hämtar inte felaktiga rader!!
-                {
-
-                    continue;
-                }
-
-                List.Add(new WeatherRecord
-                {
-                    Time = time,
-                    Place = p[1],
-                    temp = double.Parse(p[2]),
-                    Humidity = int.Parse(p[3])
-                });
-            }
-            return List;
-        }
+       
     }
 }
