@@ -11,6 +11,7 @@ namespace Weather
             while (true)
             {
                 Console.Clear();
+                Console.WriteLine("\x1b[3J");
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine("välj en alternativ!");
                 Console.WriteLine("------------------------------");

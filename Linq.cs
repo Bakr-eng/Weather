@@ -27,8 +27,10 @@ namespace Weather
 
 
             Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("Medeltemperatur och luftfuktighet per dag (UTE)");
             Console.WriteLine("------------------------------------------------------");
+            Console.ResetColor();
             foreach (var r in result)
             {
                 Console.WriteLine($"{r.Datum:yyyy-MM-dd} Temp: {r.Temp:F1}°C Fukt: {r.Fukt:F0}%"); // F = floating point (decimal)
@@ -39,6 +41,7 @@ namespace Weather
 
         public static void VarmasteDag(string fileName, string place)
         {
+            Console.Clear();
             var data = Load(Program.Path + fileName)
                 .Where(x => x.Place == place);
 
@@ -54,9 +57,10 @@ namespace Weather
 
 
 
-            Console.Clear();
+            Console.ForegroundColor= ConsoleColor.DarkCyan;
             Console.WriteLine("Varmaste till kalast dag (UTE)");
             Console.WriteLine("------------------------------------------------------");
+            Console.ResetColor();
             foreach (var r in result)
             {
                 Console.WriteLine($"{r.Datum:yyyy-MM-dd} Temp: {r.Temp:F01}°C"); // F = floating point (decimal)
