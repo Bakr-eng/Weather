@@ -33,7 +33,7 @@ namespace Weather
 
                 foreach (var r in result)
                 {
-                    writer.WriteLine($"Månad {r.Månad}: Temp {r.Temp}°C");
+                    writer.WriteLine($"Månad {r.Månad}: Temp {r.Temp:F0}°C");
                 }
 
             }
@@ -52,6 +52,6 @@ namespace Weather
             Console.ReadKey();
 
         }
-
+        
     }
 }
