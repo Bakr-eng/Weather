@@ -11,8 +11,22 @@ namespace Weather
         public static void Show()
         {
             Console.Clear();
-            Console.WriteLine("Inom hus");
-            Console.WriteLine("---------------------");
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("Inomhus");
+            Console.WriteLine("----------------------");
+
+            Console.ForegroundColor= ConsoleColor.Green;
+            Console.WriteLine("1. Medeltemperatur och luftfuktighet per dag");
+            Console.WriteLine("2. Varmast till kallaste dagen enligt medeltemperatur per dag");
+            Console.ResetColor();
+
+            var key = Console.ReadKey();
+
+            switch (char.ToLower(key.KeyChar))
+            {
+                case '1': Linq.MedelTempPerDag("tempdata5-med fel.txt", "Inne"); break;
+
+            }
         }
     }
 }
