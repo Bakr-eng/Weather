@@ -4,6 +4,7 @@ namespace Weather
 {
     internal class Program
     {
+        public static string Path = "../../../files/";
         static void Main(string[] args)
         {
             Console.WriteLine("välj en alternativ!");
@@ -11,7 +12,7 @@ namespace Weather
             Console.WriteLine("1. utomhus");
             Console.WriteLine("2. inomhus");
             Console.WriteLine("0. Lässa hela filen");
-            char index;
+            
 
 
             var key = Console.ReadKey();
