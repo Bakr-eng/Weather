@@ -11,7 +11,7 @@ namespace Weather
     {
         public async Task CallReg(string pattern)
         {
-            Console.WriteLine("RegEx Called with: " + pattern):
+            Console.WriteLine("RegEx Called with: " + pattern);
         }
     }
 }
