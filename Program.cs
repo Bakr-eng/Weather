@@ -26,8 +26,8 @@ namespace Weather
                 switch (char.ToLower(key.KeyChar))
                 {
                     case '0': ReadFiles.Read("tempdata5-med fel.txt"); break;
-                    case '1': Utomhus.Show(); break;
-                    case '2': InomHus.Show(); break;
+                    case '1': Place.Utomhus(); break;
+                    case '2': Place.Inomhus(); break;
                     case 'a': WeatherReportWriter.CreateReport("tempdata5-med fel.txt"); break;
                     
 

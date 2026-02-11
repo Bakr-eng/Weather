@@ -25,7 +25,7 @@ namespace Weather
                 .ToList();
 
 
-            using (var writer = new StreamWriter(Program.Path + "textfil"))
+            using (var writer = new StreamWriter(Program.Path + "textfil.txt"))
             {
                 writer.WriteLine("Medeltemperatur per månad (Inne/UTE)"); // temperatur
                 writer.WriteLine("------------------------------------------------------");
@@ -95,6 +95,11 @@ namespace Weather
 
 
             Console.ReadKey();
+        }
+
+        public static void Vinterhöst(string fileName)
+        {
+
         }
     }
 }
