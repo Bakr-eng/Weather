@@ -28,7 +28,7 @@ namespace Weather
                     case '0': ReadFiles.Read("tempdata5-med fel.txt"); break;
                     case '1': Utomhus.Show(); break;
                     case '2': InomHus.Show(); break;
-                    case 'a': WeatherReportWriter.CreateReport("tempdata5-med fel.txt"); break;
+                    case 'a': WeatherReportWriter.TempPerMånad("tempdata5-med fel.txt"); break;
                     
 
                 }

@@ -8,7 +8,7 @@ namespace Weather
 {
     internal class WeatherReportWriter
     {
-        public static void CreateReport(string fileName)
+        public static void TempPerMånad(string fileName)
         {
 
 
@@ -22,13 +22,13 @@ namespace Weather
                     Temp = g.Average(x => x.temp),
                     Fukt = g.Average(x => x.Humidity)
                 })
+                .OrderBy(x => x.Månad)
                 .ToList();
 
 
-            string reportPath = Program.Path + "Månadsrapport.txt";
             using (var writer = new StreamWriter(Program.Path + "textfil"))
             {
-                writer.WriteLine("Medeltemperatur och luftfuktighet per månad");
+                writer.WriteLine("Medeltemperatur per månad (Inne/UTE)");
                 writer.WriteLine("------------------------------------------------------");
 
                 foreach (var r in result)
@@ -36,22 +36,42 @@ namespace Weather
                     writer.WriteLine($"Månad {r.Månad}: Temp {r.Temp:F0}°C");
                 }
 
+
+                writer.WriteLine("--------------------------------------------------\n");
+
+                writer.WriteLine("Medel luftfuktighet per månad (Inne/UTE)");
+                writer.WriteLine("------------------------------------------------------");
+
+                foreach (var r in result)
+                {
+                    writer.WriteLine($"Månad {r.Månad}: Fukt {r.Fukt:F0}%");
+                }
             }
 
 
             // för att se i Consolen...
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("Medeltemperatur och luftfuktighet per dag (UTE)");
+            Console.WriteLine("Medeltemperatur per månad (Inne/UTE)");
             Console.WriteLine("------------------------------------------------------");
             Console.ResetColor();
             foreach (var r in result)
             {
-                Console.WriteLine($"{r.Månad} Temp: {r.Temp:F0}°C"); // F = floating point (decimal)
+                Console.WriteLine($"Månad {r.Månad}: Temp {r.Temp:F0}°C"); // F = floating point (decimal)
+            }
+
+
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("Medel luftfuktighet per månad (Inne/UTE)");
+            Console.WriteLine("------------------------------------------------------");
+            Console.ResetColor();
+
+            foreach (var r in result)
+            {
+                Console.WriteLine($"Månad {r.Månad}: Fukt {r.Fukt:F0}%");
             }
             Console.ReadKey();
 
         }
-        
     }
 }
