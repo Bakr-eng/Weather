@@ -9,15 +9,13 @@ namespace Weather
 {
     internal class RegExHandler
     {
-        public async Task CallReg(string pattern)
-        {
-            Console.WriteLine("RegEx Called with: " + pattern);
-            Regex rg = new Regex(pattern);
-        }
-
         public static bool GetMatch(string line)
         {
-            string pattern = @"([0-9]{4}).([01|02|03|04|05|06|07|08|09|10|11|12]{2}).([0-9]{2}) (([0-9]{2}:){2}[0-9]{2}.)([Inne|Ute]{3,4},)([0-9.]{1,5}),([0-9]{1,3})";
+            string pattern = @"([0-9]{4})-([01|02|03|04|05|06|07|08|09|10|11|12]{2})-([0-9]{2}) (([0-9]{2}:){2}[0-9]{2}),([Inne|Ute]{3,4},)([0-9.]{1,5}),([0-9]{1,3})";
+            // In order pattern checks for:
+            // # - stands for number between '0-9'
+            // ¤ - stands for number between '0-9' also '.'
+            // ####-##-## ##:##:##,(Inne|Ute),¤¤¤¤¤,###
             Regex rg = new Regex(pattern);
 
             /*
