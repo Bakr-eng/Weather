@@ -22,12 +22,11 @@ namespace Weather
 
             foreach (var line in File.ReadAllLines(filePath))
             {
+                if (RegExHandler.GetMatch(line)) continue; // Kollar om datan är rätt formulerad
                 var p = line.Split(',');  // Dela upp texten vid varje komma
 
                 if (!DateTime.TryParse(p[0], out DateTime time)) continue;// Hämtar inte felaktiga rader!!
-
-
-
+                
                 List.Add(new WeatherRecord
                 {
                     Time = time,
