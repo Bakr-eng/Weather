@@ -8,10 +8,8 @@ namespace Weather
 {
     internal class WeatherReportWriter
     {
-        public static void TempPerMånad(string fileName)
+        public static void CreateReport(string fileName)
         {
-
-
             var data = WeatherRecord.Load(Program.Path + fileName);
 
             var result = data
@@ -20,7 +18,8 @@ namespace Weather
                 {
                     Månad = g.Key,  // Key = för varje datom 
                     Temp = g.Average(x => x.temp),
-                    Fukt = g.Average(x => x.Humidity)
+                    Fukt = g.Average(x => x.Humidity),
+                    MögelRisk = g.Average(x => (x.temp * x.Humidity) / 100)
                 })
                 .OrderBy(x => x.Månad)
                 .ToList();
@@ -28,7 +27,7 @@ namespace Weather
 
             using (var writer = new StreamWriter(Program.Path + "textfil"))
             {
-                writer.WriteLine("Medeltemperatur per månad (Inne/UTE)");
+                writer.WriteLine("Medeltemperatur per månad (Inne/UTE)"); // temperatur
                 writer.WriteLine("------------------------------------------------------");
 
                 foreach (var r in result)
@@ -37,14 +36,24 @@ namespace Weather
                 }
 
 
-                writer.WriteLine("--------------------------------------------------\n");
+                writer.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++++\n");
 
-                writer.WriteLine("Medel luftfuktighet per månad (Inne/UTE)");
+                writer.WriteLine("Medel luftfuktighet per månad (Inne/UTE)"); // luftfuktighet
                 writer.WriteLine("------------------------------------------------------");
 
                 foreach (var r in result)
                 {
                     writer.WriteLine($"Månad {r.Månad}: Fukt {r.Fukt:F0}%");
+                }
+
+                writer.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+
+                writer.WriteLine("Mögelrisk per månad (Inne/UTE)"); // mögelrisk
+                writer.WriteLine("------------------------------------------------------");
+
+                foreach (var m in result)
+                {
+                    writer.WriteLine($"Månad {m.Månad}: Mögelrisk {m.MögelRisk:F1}%");
                 }
             }
 
@@ -53,7 +62,7 @@ namespace Weather
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("Medeltemperatur per månad (Inne/UTE)");
-            Console.WriteLine("------------------------------------------------------");
+            Console.WriteLine("------------------------------------");
             Console.ResetColor();
             foreach (var r in result)
             {
@@ -63,15 +72,29 @@ namespace Weather
 
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("Medel luftfuktighet per månad (Inne/UTE)");
-            Console.WriteLine("------------------------------------------------------");
+            Console.WriteLine("----------------------------------------");
             Console.ResetColor();
 
             foreach (var r in result)
             {
                 Console.WriteLine($"Månad {r.Månad}: Fukt {r.Fukt:F0}%");
             }
-            Console.ReadKey();
 
+
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("Mögelrisk per månad (Inne/UTE)");
+            Console.WriteLine("------------------------------");
+            Console.ResetColor();
+
+            foreach (var m in result)
+            {
+                Console.WriteLine($"Månad {m.Månad}: Mögelrisk {m.MögelRisk:F1}%");
+
+            }
+
+
+
+            Console.ReadKey();
         }
     }
 }

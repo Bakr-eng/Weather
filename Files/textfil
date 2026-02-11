@@ -9,7 +9,7 @@ Månad 9: Temp 20°C
 Månad 10: Temp 16°C
 Månad 11: Temp 14°C
 Månad 12: Temp 13°C
---------------------------------------------------
+++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Medel luftfuktighet per månad (Inne/UTE)
 ------------------------------------------------------
@@ -22,3 +22,16 @@ Månad 9: Fukt 50%
 Månad 10: Fukt 45%
 Månad 11: Fukt 49%
 Månad 12: Fukt 44%
+++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Mögelrisk per månad (Inne/UTE)
+------------------------------------------------------
+Månad 1: Mögelrisk 3.8%
+Månad 5: Mögelrisk 8.7%
+Månad 6: Mögelrisk 7.5%
+Månad 7: Mögelrisk 10.7%
+Månad 8: Mögelrisk 8.5%
+Månad 9: Mögelrisk 9.6%
+Månad 10: Mögelrisk 5.7%
+Månad 11: Mögelrisk 3.6%
+Månad 12: Mögelrisk 2.8%
