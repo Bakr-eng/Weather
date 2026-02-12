@@ -23,7 +23,8 @@ namespace Weather
                     case '1': Place.Utomhus(); break;
                     case '2': Place.Inomhus(); break;
                     case 'a': WeatherReportWriter.CreateReport("tempdata5-med fel.txt"); break;
-                    
+                    case 'b': WeatherReportWriter.Vinterhöst("tempdata5-med fel.txt"); break;
+
 
                 }
             }

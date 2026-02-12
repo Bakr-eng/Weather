@@ -43,7 +43,7 @@ namespace Weather
 
         public static void VarmasteDag(string fileName, string place)
         {
-            Console.Clear();
+            
             var data = WeatherRecord.Load(Program.Path + fileName)
                 .Where(x => x.Place == place && IsIncludedDate(x.Time));
 
@@ -59,7 +59,7 @@ namespace Weather
                 .ToList();
 
 
-
+            Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("Varmaste till kalast dag (" + place + ")");
             Console.WriteLine("------------------------------------------------------");
@@ -116,6 +116,38 @@ namespace Weather
             else
             {
                 Console.WriteLine("Ingen data tillgänglig för det angivna datumet.");
+            }
+            Console.ReadKey();
+        }
+
+        public static void RiskMögel(string fileName, string place)
+        {
+            var data = WeatherRecord.Load(Program.Path + fileName)
+               .Where(x => x.Place == place && IsIncludedDate(x.Time));
+
+            var result = data
+                .GroupBy(x => x.Time.Date)
+                .Select(g => new
+                {
+                    Datum = g.Key,  // Key = för varje datom 
+                    Temp = g.Average(x => x.temp),
+                    Fukt = g.Average(x => x.Humidity),
+                    MögelRisk = g.Average(x => (x.temp * x.Humidity) / 100)
+                })
+                .OrderBy(x => x.Datum)
+                .ToList();
+
+
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("Risk för mögel per dag (" + place + ")");
+            Console.WriteLine("------------------------------------------------------");
+            Console.ResetColor();
+            
+            foreach (var r in result)
+            {
+                Console.WriteLine($"{r.Datum:yyyy-MM-dd} MögelRisk: {r.MögelRisk:F1}%");
+
             }
             Console.ReadKey();
         }
