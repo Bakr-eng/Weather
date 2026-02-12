@@ -40,7 +40,6 @@ namespace Weather
             Console.ReadKey();
 
         }
-
         public static void VarmasteDag(string fileName, string place)
         {
             
@@ -72,7 +71,6 @@ namespace Weather
             Console.ReadKey();
 
         }
-
         public static void Searching(string fileName, string place)
         {
             string pattern = @"^\d{4}-\d{2}-\d{2}$";
@@ -119,7 +117,6 @@ namespace Weather
             }
             Console.ReadKey();
         }
-
         public static void RiskMögel(string fileName, string place)
         {
             var data = WeatherRecord.Load(Program.Path + fileName)
@@ -134,7 +131,7 @@ namespace Weather
                     Fukt = g.Average(x => x.Humidity),
                     MögelRisk = g.Average(x => ReturnMogelRisk(x.temp, x.Humidity))
                 })
-                .OrderByDescending(x => x.MögelRisk)
+                .OrderBy(x => x.MögelRisk)
                 .ToList();
 
 
@@ -151,6 +148,7 @@ namespace Weather
             }
             Console.ReadKey();
         }
+
 
         // Default Value version
         public static bool IsIncludedDate(DateTime time)
