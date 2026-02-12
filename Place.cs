@@ -16,8 +16,8 @@ namespace Weather
 
             switch (char.ToLower(key.KeyChar))
             {
-                case '1': Linq.MedelTempPerDag("tempdata5-med fel.txt", "Inne"); break;
-                case '2': Linq.VarmasteDag("tempdata5-med fel.txt", "Inne"); break;
+                case '1': Show.MedelTempPerDag("tempdata5-med fel.txt", "Inne"); break;
+                case '2': Show.VarmasteDag("tempdata5-med fel.txt", "Inne"); break;
 
             }
         }
@@ -31,8 +31,8 @@ namespace Weather
 
             switch (char.ToLower(key.KeyChar))
             {
-                case '1': Linq.MedelTempPerDag("tempdata5-med fel.txt", "Ute"); break;
-                case '2': Linq.VarmasteDag("tempdata5-med fel.txt", "Ute"); break;
+                case '1': Show.MedelTempPerDag("tempdata5-med fel.txt", "Ute"); break;
+                case '2': Show.VarmasteDag("tempdata5-med fel.txt", "Ute"); break;
 
             }
         }
