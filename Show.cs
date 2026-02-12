@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Weather
@@ -70,6 +71,56 @@ namespace Weather
             }
             Console.ReadKey();
 
+        }
+
+
+
+
+        public static void Searching(string fileName, string place)
+        {
+            string pattern = @"^\d{4}-\d{2}-\d{2}$";
+
+            Console.WriteLine("Ange datum (YYYY-MM-DD):");
+            string input = Console.ReadLine();
+             while (!Regex.IsMatch(input, pattern))
+            {
+                Console.WriteLine("Felaktigt format. Ange datum: YYYY-MM-DD:");
+                input = Console.ReadLine();
+            }
+
+             DateTime datum = DateTime.Parse(input);
+
+            var data = WeatherRecord.Load(Program.Path + fileName);
+
+            var dagResultat = data
+                .Where(x => x.Time.Date == datum.Date && x.Place == place)
+                .GroupBy(x => x.Time.Date)
+                .Select(g => new
+                {
+                    Datum = g.Key,
+                    Temp = g.Average(x => x.temp),
+                    Fukt = g.Average(x => x.Humidity)
+                })
+                .FirstOrDefault();
+
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine($"Väderdata för {datum:yyyy-MM-dd} (UTE)");
+            Console.WriteLine("------------------------------------------------------");
+            Console.ResetColor();
+            if (dagResultat != null)
+            {
+                //  Console.WriteLine($"Datum: {dagResultat.Datum:yyyy-MM-dd} Temp: {dagResultat.Temp:F1}°C Fukt: {dagResultat.Fukt:F0}%");
+
+                Console.WriteLine($"Datum: {dagResultat.Datum:yyyy-mm-dd} ");
+                Console.WriteLine($"Temp: {dagResultat.Temp:F1}°C ");
+                Console.WriteLine($"Fukt: {dagResultat.Fukt:F0}% ");
+            }
+            else
+            {
+                Console.WriteLine("Ingen data tillgänglig för det angivna datumet.");
+            }
+            Console.ReadKey();
         }
 
         // Default Value version

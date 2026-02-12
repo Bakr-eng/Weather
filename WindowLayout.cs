@@ -19,13 +19,15 @@ namespace Weather
         }
         public static void Inomhus()
         {
-            List<string> inomhus = new List<string> {"1. Medeltemperatur och luftfuktighet per dag", "2. Varmast till kallaste dagen"};
+            List<string> inomhus = new List<string> {"1. Medeltemperatur och luftfuktighet per dag",
+                "2. Varmast till kallaste dagen", "3.sök på dagens temperatur och luftfuktighet"};
             var windowInomhus = new Window("Inomhus",0,0, inomhus);
             windowInomhus.Draw();
         }
         public static void Uomhus()
         {
-            List<string> utomhus = new List<string> { "1. Medeltemperatur och luftfuktighet per dag", "2. Varmast till kallaste dagen" };
+            List<string> utomhus = new List<string> { "1. Medeltemperatur och luftfuktighet per dag",
+                "2. Varmast till kallaste dagen", "3.sök på dagens temperatur och luftfuktighet" };
             var windowUomhus = new Window("Utomhus", 0, 0, utomhus);
             windowUomhus.Draw();
         }
