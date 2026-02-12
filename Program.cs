@@ -12,14 +12,8 @@ namespace Weather
             {
                 Console.Clear();
                 Console.WriteLine("\x1b[3J");
-                //Console.WriteLine("välj en alternativ!");
-                //Console.WriteLine("------------------------------");
-                //Console.WriteLine("0. Läsa hela filen");
-                //Console.WriteLine("1. Utomhus");
-                //Console.WriteLine("2. Inomhus");
 
                 WindowLayout.Title();
-
 
 
                 var key = Console.ReadKey();
