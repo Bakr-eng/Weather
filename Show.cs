@@ -132,9 +132,9 @@ namespace Weather
                     Datum = g.Key,  // Key = för varje datom 
                     Temp = g.Average(x => x.temp),
                     Fukt = g.Average(x => x.Humidity),
-                    MögelRisk = g.Average(x => (x.temp * x.Humidity) / 100)
+                    MögelRisk = g.Average(x => ReturnMogelRisk(x.temp, x.Humidity))
                 })
-                .OrderBy(x => x.Datum)
+                .OrderByDescending(x => x.MögelRisk)
                 .ToList();
 
 
@@ -192,6 +192,15 @@ namespace Weather
                 return IsIncludedDate(time);
             }
             return time >= lower_range && time < upper_range;
+        }
+
+        public static double ReturnMogelRisk(double temp, double fukt)
+        {
+            if (temp < 0 || temp > 50 || fukt < 78)
+            {
+                return 0;
+            }
+            return (temp * fukt) / 100;
         }
 
     }
