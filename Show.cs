@@ -30,7 +30,7 @@ namespace Weather
 
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("Medeltemperatur och luftfuktighet per dag (UTE)");
+            Console.WriteLine("Medeltemperatur och luftfuktighet per dag (" + place + ")");
             Console.WriteLine("------------------------------------------------------");
             Console.ResetColor();
             foreach (var r in result)
@@ -61,7 +61,7 @@ namespace Weather
 
 
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("Varmaste till kalast dag (UTE)");
+            Console.WriteLine("Varmaste till kalast dag (" + place + ")");
             Console.WriteLine("------------------------------------------------------");
             Console.ResetColor();
 
@@ -72,9 +72,6 @@ namespace Weather
             Console.ReadKey();
 
         }
-
-
-
 
         public static void Searching(string fileName, string place)
         {
@@ -105,7 +102,7 @@ namespace Weather
 
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine($"Väderdata för {datum:yyyy-MM-dd} (UTE)");
+            Console.WriteLine($"Väderdata för {datum:yyyy-MM-dd} (" + place + ")");
             Console.WriteLine("------------------------------------------------------");
             Console.ResetColor();
             if (dagResultat != null)
