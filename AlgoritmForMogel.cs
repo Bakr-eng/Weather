@@ -11,7 +11,9 @@ namespace Weather
     {
         public static void CalculateMogelRisk(string fileName)
         {
-                       var data = WeatherRecord.Load(Program.Path + fileName);
+            Console.Clear();
+            Console.WriteLine("\x1b[3J");
+            var data = WeatherRecord.Load(Program.Path + fileName);
             var result = data
                 .Where(x => Show.IsIncludedDate(x.Time))
                 .GroupBy(x => x.Time.Month)
@@ -34,10 +36,9 @@ namespace Weather
                 writer.WriteLine("Mögelrisken beräknar genom att kombinera temperatur och luftfuktighet.");
                 writer.WriteLine("Hög temperatur och hög luftfuktighet ökar risken för mögel.\n");
                 writer.WriteLine("Förmel: ");
-                writer.WriteLine("(temperatur / 30) * (luftfuktighet / 100) * 100\n");
-                writer.WriteLine("Skalan är 0-100% där: \n");
+                writer.WriteLine("(temperatur / 30) * (luftfuktighet / 100) * 100");
                 writer.WriteLine("----------------------------------------------\n");
-
+                writer.WriteLine("Skalan är 0-100% där: ");
                 writer.WriteLine("0 = ingen risk  & 100 = maximal risk.\n");
 
                 writer.WriteLine("--------------------------------------------");
@@ -50,10 +51,8 @@ namespace Weather
                 }
                 writer.WriteLine("--------------------------------------------\n");
             }
-
-
-
             Console.Clear();
+            
             WindowLayout.InfoAlgoritm();
 
 

@@ -4,11 +4,9 @@ Hög temperatur och hög luftfuktighet ökar risken för mögel.
 
 Förmel: 
 (temperatur / 30) * (luftfuktighet / 100) * 100
-
-Skalan är 0-100% där: 
-
 ----------------------------------------------
 
+Skalan är 0-100% där: 
 0 = ingen risk  & 100 = maximal risk.
 
 --------------------------------------------

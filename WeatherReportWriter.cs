@@ -92,14 +92,9 @@ namespace Weather
 
             }
 
-
-
             Console.ReadKey();
         }
 
-        public static void Vinterhöst(string fileName)
-        {
-
-        }
+       
     }
 }

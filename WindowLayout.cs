@@ -43,7 +43,7 @@ namespace Weather
         }
         public static void Skala()
         {
-            List<string> risk = new List<string> {"", "Skalan är 0-100% där:", "0 = ingen risk", " 100 = maximal risk.","" };
+            List<string> risk = new List<string> {"", "Skalan är 0-100% där:", "0 = ingen risk", "100 = maximal risk.","" };
             var windowRisk = new Window("skala", 49, 10, risk);
             windowRisk.Draw();
         }
