@@ -25,6 +25,7 @@ namespace Weather
                     case '4': WeatherReportWriter.CreateReport("tempdata5-med fel.txt"); break;
                     case '5': DateForWinterAndAutumn.CreateReport("tempdata5-med fel.txt"); break;
                     case '6': AlgoritmForMogel.CalculateMogelRisk("tempdata5-med fel.txt"); break;
+                     
 
 
                 }

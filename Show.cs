@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -69,6 +70,37 @@ namespace Weather
                 Console.WriteLine($"{r.Datum:yyyy-MM-dd} Temp: {r.Temp:F01}°C"); // F = floating point (decimal)
             }
             Console.ReadKey();
+
+        }
+
+        public static void torrasteDag(string fileName, string place)
+        {
+            var data = WeatherRecord.Load(Program.Path + fileName)
+                .Where(x => x.Place == place && IsIncludedDate(x.Time));
+
+            var result = data
+                .GroupBy(x => x.Time.Date)
+                .Select(g => new
+                {
+                    Datum = g.Key,  // Key = för varje datom 
+                    Temp = g.Average(x => x.temp),
+                    Fukt = g.Average(x => x.Humidity)
+                })
+                .OrderBy(x => x.Fukt)
+                .ToList();
+
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("Torraste till fuktigate dag (" + place + ")");
+            Console.WriteLine("------------------------------------------------------");
+            Console.ResetColor();
+
+            foreach (var r in result)
+            {
+                Console.WriteLine($"{r.Datum:yyyy-MM-dd} Fukt: {r.Fukt:F0}%"); // F = floating point (decimal)
+            }
+            Console.ReadKey();
+
 
         }
         public static void Searching(string fileName, string place)

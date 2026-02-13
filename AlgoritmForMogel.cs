@@ -11,8 +11,7 @@ namespace Weather
     {
         public static void CalculateMogelRisk(string fileName)
         {
-            Console.Clear();
-            Console.WriteLine("\x1b[3J");
+            
             var data = WeatherRecord.Load(Program.Path + fileName);
             var result = data
                 .Where(x => Show.IsIncludedDate(x.Time))
