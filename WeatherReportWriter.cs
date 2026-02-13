@@ -19,7 +19,7 @@ namespace Weather
                     Månad = g.Key,  // Key = för varje datom 
                     Temp = g.Average(x => x.temp),
                     Fukt = g.Average(x => x.Humidity),
-                    MögelRisk = g.Average(x => (x.temp / 30.0) * (x.Humidity / 100.0) * 100)
+                    MögelRisk = g.Average(x => Show.ReturnMogelRisk(x.temp,x.Humidity))
                 })
                 .OrderBy(x => x.Månad)
                 .ToList();

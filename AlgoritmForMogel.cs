@@ -43,6 +43,7 @@ namespace Weather
                 writer.WriteLine("----------------------------------------------\n");
                 writer.WriteLine("Skalan är 0-100% där: ");
                 writer.WriteLine("0 = ingen risk  & 100 = maximal risk.\n");
+                writer.WriteLine("Notera; den riktiga risken för månaderna ligger egentligen på 0 då Micke inte har mögel i hemmet based on data.");
 
                 writer.WriteLine("--------------------------------------------");
                 writer.WriteLine($"| {"Månad",-5} |{"Temperatur",-5} | {"Fukt",-6} | {"Mögelrisk %",-10} |");
@@ -64,6 +65,7 @@ namespace Weather
             Console.WriteLine("Skalan är 0-100% där:");
             Console.WriteLine("0 = ingen risk");
             Console.WriteLine("100 = maximal risk.");
+            Console.WriteLine("Notera; den riktiga risken för månaderna ligger egentligen på 0 då Micke inte har mögel i hemmet based on data.");
             Console.WriteLine("-------------------------");
             Console.ResetColor();
 
@@ -79,15 +81,6 @@ namespace Weather
 
 
             Console.ReadKey();
-        }
-        // Actual formula used to make sure we don't imply Micke has mögel in his home
-        public static double ReturnMogelRisk(double temp, double fukt)
-        {
-            if (temp < 0 || temp > 50 || fukt < 78)
-            {
-                return 0;
-            }
-            return (temp / 30.0) * (fukt / 100.0) * 100;
         }
     }
 }

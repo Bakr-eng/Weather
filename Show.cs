@@ -230,7 +230,7 @@ namespace Weather
             {
                 return 0;
             }
-            return (temp * fukt) / 100;
+            return (temp / 30.0) * (fukt / 100.0) * 100;
         }
 
     }
