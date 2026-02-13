@@ -13,6 +13,7 @@ namespace Weather
         {
                        var data = WeatherRecord.Load(Program.Path + fileName);
             var result = data
+                .Where(x => Show.IsIncludedDate(x.Time))
                 .GroupBy(x => x.Time.Month)
                 .Select(g => new
                 {

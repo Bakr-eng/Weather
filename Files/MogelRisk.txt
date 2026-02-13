@@ -11,11 +11,9 @@ Skalan är 0-100% där:
 ----------------------------------------------
 
 Månad 12: Mögelrisk 10.8%
-Månad 1: Mögelrisk 12.5%
 Månad 11: Mögelrisk 13.5%
 Månad 10: Mögelrisk 18.9%
 Månad 6: Mögelrisk 24.9%
 Månad 8: Mögelrisk 28.4%
-Månad 5: Mögelrisk 29.1%
 Månad 9: Mögelrisk 32.0%
 Månad 7: Mögelrisk 35.5%
