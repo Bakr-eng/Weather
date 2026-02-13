@@ -26,7 +26,7 @@ namespace Weather
         public static void Utomhus()
         {
             Console.Clear();
-            WindowLayout.Uomhus();
+            WindowLayout.Utomhus();
 
 
             var key = Console.ReadKey(true);

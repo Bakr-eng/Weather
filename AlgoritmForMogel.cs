@@ -35,32 +35,39 @@ namespace Weather
                 writer.WriteLine("Hög temperatur och hög luftfuktighet ökar risken för mögel.\n");
                 writer.WriteLine("Förmel: ");
                 writer.WriteLine("(temperatur / 30) * (luftfuktighet / 100) * 100\n");
-                writer.WriteLine("Skalan är 0-100% där: \n0 = ingen risk  \n100 = maximal risk.");
+                writer.WriteLine("Skalan är 0-100% där: \n");
                 writer.WriteLine("----------------------------------------------\n");
+
+                writer.WriteLine("0 = ingen risk  & 100 = maximal risk.\n");
+
+                writer.WriteLine("--------------------------------------------");
+                writer.WriteLine($"| {"Månad",-5} |{"Temperatur",-5} | {"Fukt",-6} | {"Mögelrisk %",-10} |");
+                writer.WriteLine("--------------------------------------------");
                 foreach (var m in result)
                 {
-                    writer.WriteLine($"Månad {m.Månad}: Mögelrisk {m.MögelRisk:F1}%");
+                    writer.WriteLine($"| {m.Månad,-5} | {m.Temp,-9:F1} | {m.Fukt,-6:F1} | {m.MögelRisk,-11:F1} |");
+                   
                 }
+                writer.WriteLine("--------------------------------------------\n");
             }
 
 
 
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("Algoritm för mögelrisk:");
-            Console.WriteLine("Mögelrisken beräknar genom att kombinera temperatur och luftfuktighet.");
-            Console.WriteLine("Hög temperatur och hög luftfuktighet ökar risken för mögel.\n");
-            Console.ResetColor();
+            WindowLayout.InfoAlgoritm();
 
-            Console.WriteLine("Förmel: ");
-            Console.WriteLine("(temperatur / 30) * (luftfuktighet / 100) * 100\n");
 
-            Console.WriteLine("Skalan är 0-100% där: \n0 = ingen risk  \n100 = maximal risk.");
-            Console.WriteLine("----------------------------------------------\n");
+            Console.WriteLine("--------------------------------------------");
+            Console.WriteLine($"| {"Månad",-5} |{"Temperatur",-5} | {"Fukt",-6} | {"Mögelrisk %",-10} |");
+            Console.WriteLine("--------------------------------------------");
             foreach (var m in result)
             {
-                Console.WriteLine($"Månad {m.Månad}: Mögelrisk {m.MögelRisk:F1}%");
+                Console.WriteLine($"| {m.Månad, -5} | {m.Temp, -9:F1} | {m.Fukt, -6:F1} | {m.MögelRisk, -11:F1} |");
+
             }
+            Console.WriteLine("--------------------------------------------");
+
+            WindowLayout.Skala();
             Console.ReadKey();
         }
     }
