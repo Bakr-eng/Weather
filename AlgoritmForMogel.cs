@@ -11,7 +11,11 @@ namespace Weather
     {
         public static void CalculateMogelRisk(string fileName)
         {
-            
+            Console.Clear();
+            if (File.Exists(fileName))
+            {
+                Console.WriteLine("Filen finns inte. Vänligen kontrollera filnamnet och sökvägen.");
+            }
             var data = WeatherRecord.Load(Program.Path + fileName);
             var result = data
                 .Where(x => Show.IsIncludedDate(x.Time))
@@ -50,10 +54,18 @@ namespace Weather
                 }
                 writer.WriteLine("--------------------------------------------\n");
             }
-            Console.Clear();
-            
-            WindowLayout.InfoAlgoritm();
 
+
+
+            // Visa resultatet i konsolen
+            WindowLayout.InfoAlgoritm();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("------------------------");
+            Console.WriteLine("Skalan är 0-100% där:");
+            Console.WriteLine("0 = ingen risk");
+            Console.WriteLine("100 = maximal risk.");
+            Console.WriteLine("-------------------------");
+            Console.ResetColor();
 
             Console.WriteLine("--------------------------------------------");
             Console.WriteLine($"| {"Månad",-5} |{"Temperatur",-5} | {"Fukt",-6} | {"Mögelrisk %",-10} |");
@@ -65,7 +77,7 @@ namespace Weather
             }
             Console.WriteLine("--------------------------------------------");
 
-            WindowLayout.Skala();
+
             Console.ReadKey();
         }
     }
