@@ -15,43 +15,31 @@ namespace Weather
         public int Humidity { get; set; }
 
 
+
         public static List<WeatherRecord> Load(string filePath)
         {
-            var list = new List<WeatherRecord>();
+            var List = new List<WeatherRecord>();
 
             foreach (var line in File.ReadAllLines(filePath))
             {
-                if (string.IsNullOrWhiteSpace(line))
-                    continue;
+                if (!RegExHandler.GetMatch(line)) continue; // Kollar om datan är rätt formulerad
 
-                var p = line.Split(',');
-                if (p.Length != 4)
-                    continue;
+                var p = line.Split(',');  // Dela upp texten vid varje komma
 
-                if (!DateTime.TryParse(p[0].Trim(), out DateTime time))
-                    continue;
+                if (!DateTime.TryParse(p[0], out DateTime time)) continue;// Hämtar inte felaktiga rader!!
+             
+                
+               
 
-                string place = p[1].Trim();
-                if (place != "Inne" && place != "Ute")
-                    continue;
-
-                if (!double.TryParse(p[2].Trim(), NumberStyles.Any, CultureInfo.InvariantCulture, out double temp))
-                    continue;
-
-                if (!int.TryParse(p[3].Trim(), out int humidity))
-                    continue;
-
-                list.Add(new WeatherRecord
+                List.Add(new WeatherRecord
                 {
                     Time = time,
-                    Place = place,
-                    temp = temp,
-                    Humidity = humidity
+                    Place = p[1],
+                    temp = double.Parse(p[2], CultureInfo.InvariantCulture.NumberFormat),
+                    Humidity = int.Parse(p[3])
                 });
             }
-
-            return list;
+            return List;
         }
-
     }
 }

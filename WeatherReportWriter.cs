@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Weather
 {
@@ -9,130 +10,91 @@ namespace Weather
     {
         public static void CreateReport(string fileName)
         {
-            // Läs in data och filtrera på UTE
-            var data = WeatherRecord.Load(Program.Path + fileName)
-                .Where(x => x.Place == "Ute")
-                .Where(x => !(x.Time.Year == 2016 && x.Time.Month == 5))  // Ignorera maj 2016
-                .Where(x => !(x.Time.Year == 2017 && x.Time.Month == 1))  // Ignorera januari 2017
-                .ToList();
+            var data = WeatherRecord.Load(Program.Path + fileName);
 
-            Console.WriteLine("Månader som finns i UTE-datan efter filtrering:");
-            var months = data
-                .Select(x => x.Time.Month)
-                .Distinct()
-                .OrderBy(x => x);
-
-            foreach (var m in months)
-                Console.WriteLine(m);
-
-            
-
-            // Beräkna meteorologisk höst och vinter
-            var autumnDate = GetMeteorologicalAutumnDate(data);
-            var winterDate = GetMeteorologicalWinterDate(data);
-
-            // Gruppberäkning per månad
             var result = data
                 .GroupBy(x => x.Time.Month)
                 .Select(g => new
                 {
-                    Månad = g.Key,
+                    Månad = g.Key,  // Key = för varje datom 
                     Temp = g.Average(x => x.temp),
-                    Fukt = g.Average(x => x.Humidity)
+                    Fukt = g.Average(x => x.Humidity),
+                    MögelRisk = g.Average(x => (x.temp / 30.0) * (x.Humidity / 100.0) * 100)
                 })
                 .OrderBy(x => x.Månad)
                 .ToList();
 
-            // Skriv rapportfil
-            string reportPath = Program.Path + "Månadsrapport.txt";
 
-            using (var writer = new StreamWriter(reportPath))
+            using (var writer = new StreamWriter(Program.Path + "textfil.txt"))
             {
-                writer.WriteLine("Månadsrapport");
-                writer.WriteLine("------------------------------------------------------");
-                writer.WriteLine();
-
-                writer.WriteLine("Meteorologiska årstider:");
-                writer.WriteLine($"Höst:  {autumnDate?.ToShortDateString() ?? "Ingen höst hittad"}");
-                writer.WriteLine($"Vinter: {winterDate?.ToShortDateString() ?? "Ingen vinter (mild vinter)"}");
-                writer.WriteLine();
-
-                writer.WriteLine("Medeltemperatur och luftfuktighet per månad:");
+                writer.WriteLine("Medeltemperatur per månad (Inne/UTE)"); // temperatur
                 writer.WriteLine("------------------------------------------------------");
 
                 foreach (var r in result)
                 {
-                    writer.WriteLine($"Månad {r.Månad}: Temp {r.Temp:F1}°C, Fukt {r.Fukt:F0}%");
+                    writer.WriteLine($"Månad {r.Månad}: Temp {r.Temp:F0}°C");
+                }
+
+
+                writer.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+
+                writer.WriteLine("Medel luftfuktighet per månad (Inne/UTE)"); // luftfuktighet
+                writer.WriteLine("------------------------------------------------------");
+
+                foreach (var r in result)
+                {
+                    writer.WriteLine($"Månad {r.Månad}: Fukt {r.Fukt:F0}%");
+                }
+
+                writer.WriteLine("++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+
+                writer.WriteLine("Mögelrisk per månad (Inne/UTE)"); // mögelrisk
+                writer.WriteLine("------------------------------------------------------");
+
+                foreach (var m in result)
+                {
+                    writer.WriteLine($"Månad {m.Månad}: Mögelrisk {m.MögelRisk:F1}%");
                 }
             }
 
-            // Skriv till konsolen
+
+            // för att se i Consolen...
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine("Månadsrapport");
-            Console.WriteLine("------------------------------------------------------");
+            Console.WriteLine("Medeltemperatur per månad (Inne/UTE)");
+            Console.WriteLine("------------------------------------");
             Console.ResetColor();
+            foreach (var r in result)
+            {
+                Console.WriteLine($"Månad {r.Månad}: Temp {r.Temp:F0}°C"); // F = floating point (decimal)
+            }
 
-            Console.WriteLine($"Meteorologisk höst:  {autumnDate?.ToShortDateString() ?? "Ingen höst"}");
-            Console.WriteLine($"Meteorologisk vinter: {winterDate?.ToShortDateString() ?? "Ingen vinter (mild vinter)"}");
-            Console.WriteLine();
+
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("Medel luftfuktighet per månad (Inne/UTE)");
+            Console.WriteLine("----------------------------------------");
+            Console.ResetColor();
 
             foreach (var r in result)
             {
-                Console.WriteLine($"{r.Månad}: Temp {r.Temp:F1}°C, Fukt {r.Fukt:F0}%");
+                Console.WriteLine($"Månad {r.Månad}: Fukt {r.Fukt:F0}%");
+            }
+
+
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine("Mögelrisk per månad (Inne/UTE)");
+            Console.WriteLine("------------------------------");
+            Console.ResetColor();
+
+            foreach (var m in result)
+            {
+                Console.WriteLine($"Månad {m.Månad}: Mögelrisk {m.MögelRisk:F1}%");
+
             }
 
             Console.ReadKey();
         }
 
-        // ---------------------------------------------------------
-        // METEOROLOGISK HÖST (SMHI-regler)
-        // ---------------------------------------------------------
-        private static DateTime? GetMeteorologicalAutumnDate(List<WeatherRecord> data)
-        {
-            var daily = GetDailyMeans(data);
-
-            // Höst får tidigast börja 1 augusti
-            daily = daily.Where(d => d.Date >= new DateTime(d.Date.Year, 8, 1)).ToList();
-
-            for (int i = 0; i < daily.Count - 4; i++)
-            {
-                var fiveDays = daily.Skip(i).Take(5).ToList();
-
-                // SMHI: 5 dygn i rad med 0 < temp < 10
-                if (fiveDays.All(d => d.MeanTemp < 10 && d.MeanTemp > 0))
-                    return fiveDays.First().Date;
-            }
-
-            return null;
-        }
-
-        // ---------------------------------------------------------
-        // METEOROLOGISK VINTER (SMHI-regler)
-        // ---------------------------------------------------------
-        private static DateTime? GetMeteorologicalWinterDate(List<WeatherRecord> data)
-        {
-            var daily = GetDailyMeans(data);
-
-            for (int i = 0; i < daily.Count - 4; i++)
-            {
-                var fiveDays = daily.Skip(i).Take(5).ToList();
-
-                // SMHI: 5 dygn i rad med temp <= 0
-                if (fiveDays.All(d => d.MeanTemp <= 0))
-                    return fiveDays.First().Date;
-            }
-
-            return null;
-        }
-        private static List<(DateTime Date, double MeanTemp)> GetDailyMeans(List<WeatherRecord> data)
-        {
-            return data
-                .GroupBy(x => x.Time.Date)
-                .Select(g => (Date: g.Key, MeanTemp: g.Average(x => x.temp)))
-                .OrderBy(x => x.Date)
-                .ToList();
-        }
-
+       
     }
 }

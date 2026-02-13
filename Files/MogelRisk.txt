@@ -1,0 +1,23 @@
+Algoritm för mögelrisk:
+Mögelrisken beräknar genom att kombinera temperatur och luftfuktighet.
+Hög temperatur och hög luftfuktighet ökar risken för mögel.
+
+Förmel: 
+(temperatur / 30) * (luftfuktighet / 100) * 100
+----------------------------------------------
+
+Skalan är 0-100% där: 
+0 = ingen risk  & 100 = maximal risk.
+
+--------------------------------------------
+| Månad |Temperatur | Fukt   | Mögelrisk % |
+--------------------------------------------
+| 12    | 14.7      | 40.3   | 10.8        |
+| 11    | 15.4      | 44.9   | 13.5        |
+| 10    | 15.7      | 44.9   | 18.9        |
+| 6     | 21.0      | 39.0   | 24.9        |
+| 8     | 18.7      | 47.4   | 28.4        |
+| 9     | 20.0      | 50.3   | 32.0        |
+| 7     | 23.2      | 47.5   | 35.5        |
+--------------------------------------------
+

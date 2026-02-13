@@ -12,24 +12,21 @@ namespace Weather
             {
                 Console.Clear();
                 Console.WriteLine("\x1b[3J");
-                //Console.WriteLine("välj en alternativ!");
-                //Console.WriteLine("------------------------------");
-                //Console.WriteLine("0. Läsa hela filen");
-                //Console.WriteLine("1. Utomhus");
-                //Console.WriteLine("2. Inomhus");
 
                 WindowLayout.Title();
-
 
 
                 var key = Console.ReadKey();
                 switch (char.ToLower(key.KeyChar))
                 {
-                    case '0': ReadFiles.Read("tempdata5-med fel.txt"); break;
-                    case '1': Utomhus.Show(); break;
-                    case '2': InomHus.Show(); break;
-                    case 'a': WeatherReportWriter.CreateReport("tempdata5-med fel.txt"); break;
-                    
+                    case '1': ReadFiles.Read("tempdata5-med fel.txt"); break;
+                    case '2': Place.Utomhus(); break;
+                    case '3': Place.Inomhus(); break;
+                    case '4': WeatherReportWriter.CreateReport("tempdata5-med fel.txt"); break;
+                    case '5': DateForWinterAndAutumn.CreateReport("tempdata5-med fel.txt"); break;
+                    case '6': AlgoritmForMogel.CalculateMogelRisk("tempdata5-med fel.txt"); break;
+                     
+
 
                 }
             }

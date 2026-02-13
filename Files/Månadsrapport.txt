@@ -12,5 +12,5 @@ Månad 7: Temp 20.2°C, Fukt 53%
 Månad 8: Temp 18.1°C, Fukt 49%
 Månad 9: Temp 16.2°C, Fukt 60%
 Månad 10: Temp 8.2°C, Fukt 65%
-Månad 11: Temp 3.3°C, Fukt 83%
-Månad 12: Temp 2.5°C, Fukt 78%
+Månad 11: Temp 4.5°C, Fukt 83%
+Månad 12: Temp 3.6°C, Fukt 79%
