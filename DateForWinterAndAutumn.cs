@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Weather
 {
-    internal class WeatherReportWriterForWinterAndAutumn
+    internal class DateForWinterAndAutumn
     {
         public static void CreateReport(string fileName)
         {
