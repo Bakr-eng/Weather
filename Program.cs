@@ -24,6 +24,7 @@ namespace Weather
                     case '2': Place.Inomhus(); break;
                     case 'a': WeatherReportWriter.CreateReport("tempdata5-med fel.txt"); break;
                     case 'b': WeatherReportWriter.CreateReport("tempdata5-med fel.txt"); break;
+                    case 'm': AlgoritmForMogel.CalculateMogelRisk("tempdata5-med fel.txt"); break;
 
 
                 }
